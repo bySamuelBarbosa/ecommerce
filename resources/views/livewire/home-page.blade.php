@@ -251,7 +251,7 @@
 
                 <div class="bg-white rounded-lg shadow-md dark:bg-gray-800">
                     <a href="" class="">
-                        <img src="https://salesindia.com/media/codazon_cache/brand/400x400/wysiwyg/codazon/main-content-22/Brand_logo/ONEPLUS_LOGO_.png"
+                        <img src=""
                             alt="" class="object-cover w-full h-64 rounded-t-lg">
                     </a>
                     <div class="p-5 text-center">
