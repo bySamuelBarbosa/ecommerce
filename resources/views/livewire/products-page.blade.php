@@ -72,13 +72,13 @@
 
                 <div class="w-full px-3 lg:w-3/4">
                     <div class="px-3 mb-4">
-                        <div
-                            class="items-center justify-between hidden px-3 py-2 bg-gray-100 md:flex dark:bg-gray-900 ">
-                            <div class="flex items-center justify-between">
-                                <select name="" id=""
-                                    class="block w-40 text-base bg-gray-100 cursor-pointer dark:text-gray-400 dark:bg-gray-900">
-                                    <option value="">Sort by latest</option>
-                                    <option value="">Sort by Price</option>
+                        <div class="items-center justify-end hidden md:flex">
+                            <div class="flex items-center justify-between rounded-md bg-gray-200 dark:bg-gray-900 px-3 py-2">
+                                <select wire:model.live="sort" class="block w-fit text-base cursor-pointer">
+                                    <option value="desc">Sort by: Newest</option>
+                                    <option value="asc">Sort by: Oldest</option>
+                                    <option value="price_desc">Sort by Price: High to Low</option>
+                                    <option value="price_asc">Sort by Price: Low to High</option>
                                 </select>
                             </div>
                         </div>

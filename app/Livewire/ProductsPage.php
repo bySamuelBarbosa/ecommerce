@@ -30,6 +30,9 @@ class ProductsPage extends Component
     #[Url]
     public $price_range = 9999;
 
+    #[Url]
+    public $sort = 'latest';
+
     public $maxPrice;
 
     public function render()
@@ -62,6 +65,16 @@ class ProductsPage extends Component
 
         if($this->price_range){
             $productQuery->whereBetween('price', [0, $this->price_range]);
+        }
+
+        if($this->sort == 'asc'){
+            $productQuery->oldest();
+        }else if($this->sort == 'price_desc'){
+            $productQuery->orderBy('price', 'desc');
+        }else if($this->sort == 'price_asc'){
+            $productQuery->orderBy('price', 'asc');
+        }else {
+            $productQuery->latest();
         }
 
         return view('livewire.products-page', [
