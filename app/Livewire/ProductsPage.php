@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -9,11 +11,13 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 #[Title('Products - DCodeMania')]
 class ProductsPage extends Component
 {
     use WithPagination;
+    use LivewireAlert;
 
     #[Url]
     public $selected_categories = [];
@@ -34,6 +38,33 @@ class ProductsPage extends Component
     public $sort = 'latest';
 
     public $maxPrice;
+
+    public function addToCart($product_id)
+    {
+        $cartItems = CartManagement::getCartItemsFromCookie();
+        
+        if(count($cartItems) > 0){
+            foreach($cartItems as $key => $item){
+                if($item['product_id'] == $product_id){
+                    $this->alert('warning', 'This product is already in the cart!', [
+                        'position' => 'top-end',
+                        'timer' => 3000,
+                        'toast' => true
+                    ]);
+                    return;
+                }
+            }
+        }
+        
+        $total_count = CartManagement::addItemToCart($product_id);
+        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+
+        $this->alert('success', 'Product added to the cart successfully!', [
+            'position' => 'top-end',
+            'timer' => 3000,
+            'toast' => true
+        ]);
+    }
 
     public function render()
     {
