@@ -15,15 +15,19 @@ class OrderStats extends BaseWidget
 
         $currencyWithMostSoldProducts = Order::query()
             ->select('currency', DB::raw('SUM(grand_total) as total_grand_total'))
+            ->whereNotNull('currency')
             ->groupBy('currency')
             ->orderByDesc('total_grand_total')
-            ->first()
-            ->currency;
+            ->first();
 
         
-        $averagePrice = Order::query()
-            ->where('currency', $currencyWithMostSoldProducts)
-            ->avg('grand_total');
+        if ($currencyWithMostSoldProducts) {
+            $averagePrice = Order::query()
+                ->where('currency', $currencyWithMostSoldProducts->currency)
+                ->avg('grand_total');
+        } else {
+            $averagePrice = 0;
+        }
 
 
         return [
@@ -32,7 +36,7 @@ class OrderStats extends BaseWidget
             Stat::make('Order Shipped', Order::query()->where('status', 'shipped')->count()),
             Stat::make('Order Delivered', Order::query()->where('status', 'delivered')->count()),
             Stat::make('Order Cancelled', Order::query()->where('status', 'cancelled')->count()),
-            Stat::make('Average Price', Number::currency($averagePrice, $currencyWithMostSoldProducts)),
+            Stat::make('Average Price', Number::currency($averagePrice, $currencyWithMostSoldProducts->currency ?? 'USD')),
         ];
     }
 }
