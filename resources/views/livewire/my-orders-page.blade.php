@@ -7,84 +7,66 @@
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead>
                             <tr>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Order</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Date</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Order
-                                    Status</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Payment
-                                    Status</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Order
-                                    Amount</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Action</th>
+                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Order</th>
+                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Date</th>
+                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Order Status</th>
+                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Payment Status</th>
+                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Order Amount</th>
+                                <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                    20</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                    18-02-2024</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"><span
-                                        class="bg-orange-500 py-1 px-3 rounded text-white shadow">Pending</span></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"><span
-                                        class="bg-green-500 py-1 px-3 rounded text-white shadow">Paid</span></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                    12,000.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                    <a href="#"
-                                        class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">View
-                                        Details</a>
-                                </td>
-                            </tr>
+                            @foreach ($orders as $order)
+                                @php
+                                    $orderStatus = '';
+                                    if ($order->status == 'new') {
+                                        $orderStatus = '<span class="bg-blue-500 py-1 px-3 rounded text-white shadow">New</span>';
+                                    }
+                                    if ($order->status == 'processing') {
+                                        $orderStatus = '<span class="bg-yellow-500 py-1 px-3 rounded text-white shadow">Processing</span>';
+                                    }
+                                    if ($order->status == 'shipped') {
+                                        $orderStatus = '<span class="bg-green-600 py-1 px-3 rounded text-white shadow">Shipped</span>';
+                                    }
+                                    if ($order->status == 'delivered') {
+                                        $orderStatus = '<span class="bg-green-700 py-1 px-3 rounded text-white shadow">Delivered</span>';
+                                    }
+                                    if ($order->status == 'cancelled') {
+                                        $orderStatus = '<span class="bg-red-600 py-1 px-3 rounded text-white shadow">Cancelled</span>';
+                                    }
 
-                            <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                    20</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                    18-02-2024</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"><span
-                                        class="bg-orange-500 py-1 px-3 rounded text-white shadow">Pending</span></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"><span
-                                        class="bg-green-500 py-1 px-3 rounded text-white shadow">Paid</span></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                    12,000.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                    <a href="#"
-                                        class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">View
-                                        Details</a>
-                                </td>
-                            </tr>
-
-                            <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
-                                <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                    20</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                    18-02-2024</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"><span
-                                        class="bg-orange-500 py-1 px-3 rounded text-white shadow">Pending</span></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200"><span
-                                        class="bg-green-500 py-1 px-3 rounded text-white shadow">Paid</span></td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                    12,000.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                    <a href="#"
-                                        class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">View
-                                        Details</a>
-                                </td>
-                            </tr>
-
+                                    $paymentStatus = '';
+                                    if($order->payment_status == 'pending'){
+                                        $paymentStatus = '<span class="bg-blue-500 py-1 px-3 rounded text-white shadow">Pending</span>';
+                                    }
+                                    if($order->payment_status == 'paid'){
+                                        $paymentStatus = '<span class="bg-green-600 py-1 px-3 rounded text-white shadow">Paid</span>';
+                                    }
+                                    if($order->payment_status == 'failed'){
+                                        $paymentStatus = '<span class="bg-red-600 py-1 px-3 rounded text-white shadow">Failed</span>';
+                                    }
+                                @endphp
+                                <tr wire:key="{{ $order->id }}" class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">{{ $order->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ $order->created_at->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                        {!! $orderStatus !!}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                        {!! $paymentStatus !!}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{{ Number::currency($order->grand_total, 'USD') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                        <a href="#" class="bg-slate-600 text-white py-2 px-4 rounded-md hover:bg-slate-500">View Details</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="flex justify-end mt-6">
+                {{ $orders->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>

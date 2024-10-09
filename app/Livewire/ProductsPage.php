@@ -74,7 +74,12 @@ class ProductsPage extends Component
             ->first()
             ->price;
 
-        $this->maxPrice = $getMaxPrice + 1000;
+        if ($getMaxPrice) {
+            $this->maxPrice = $getMaxPrice + 1000;
+        }else {
+            $this->maxPrice = 0;
+        }
+
 
         $productQuery = Product::query()->where('is_active', 1);
 
